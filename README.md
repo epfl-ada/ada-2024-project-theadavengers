@@ -1,5 +1,19 @@
-# ada-2024-project-theadavengers
-ada-2024-project-theadavengers created by GitHub Classroom
+# Echoes across time : Mapping of cultural ripples through cinema [Power of film as a cultural mirror]
 
-NEw readME
-=> We cannot load the files on the repo, so simply install the data and load it from your downloads file.
+#### Quickstart
+
+```python
+# clone project
+git clone <project link>
+cd <project repo>
+
+# [OPTIONAL] create conda environment
+conda create -n adaverngers python=3.9
+conda activate adavengers
+
+# install requirements
+pip install -r requirements.txt
+```
+
+
+

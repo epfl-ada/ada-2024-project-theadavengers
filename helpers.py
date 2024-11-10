@@ -87,6 +87,7 @@ def create_datasets(file_source = '', reviews_source = ''):
 
     # Extract the year without modifying the original column
     MovieMetadata_df['Year'] = MovieMetadata_df['Movie release date'].apply(extract_year)
-    MovieMetadata_df['Year'] = MovieMetadata_df['Year'].apply(lambda x: int(x) if pd.notna(x) else x)
+    #MovieMetadata_df['Year'] = MovieMetadata_df['Year'].apply(lambda x: int(x) if pd.notna(x) else x)
+    MovieMetadata_df['Year'] = pd.to_numeric(MovieMetadata_df['Year'], errors='coerce').astype('Int64')
 
     return MovieMetadata_df, CharacterMetadata_df, names_df, plot_summaries_df, tvTropes_df, merged_Movie

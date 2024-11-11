@@ -1,6 +1,10 @@
 ##### file dedicated to put all requirements to install while having a virtual environment (conda or venv)
 ### requirements found by doing pip freeze
 
+transformers
+evaluate 
+accelerate
+
 anyio @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_a17a7759g2/croot/anyio_1706220182417/work
 appnope @ file:///Users/cbousseau/work/recipes/ci_py311/appnope_1677917710869/work
 argon2-cffi @ file:///opt/conda/conda-bld/argon2-cffi_1645000214183/work

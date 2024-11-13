@@ -1,5 +1,5 @@
 import pandas as pd
-
+import ast
 
 def create_datasets(file_source = '', reviews_source = ''):
     # MetaData 
@@ -91,3 +91,56 @@ def create_datasets(file_source = '', reviews_source = ''):
     MovieMetadata_df['Year'] = pd.to_numeric(MovieMetadata_df['Year'], errors='coerce').astype('Int64')
 
     return MovieMetadata_df, CharacterMetadata_df, names_df, plot_summaries_df, tvTropes_df, merged_Movie
+
+# Function to count the number of movies per country and keep those with >500 movies
+def movie_per_country(countries):
+    countries_cleaned = []
+    for country in countries:
+        if len(country) > 2:
+            data_dict = ast.literal_eval(country)  # Convert the string to a dictionary
+            country_name = list(data_dict.values())[0]  
+            countries_cleaned.append(country_name)
+
+    # count the number of occurences of movies for each country
+    countries_cleaned = pd.Series(countries_cleaned)
+    counted_countries = countries_cleaned.value_counts().sort_index()
+    #keep only those that have more than 500 movies
+    kept_counted = counted_countries[counted_countries.values>500]
+    return kept_counted
+
+# Function to create a merged dataset between bechdel test and movie plots
+def bechdel_plots_dataset_creation(bechdel_data, MovieMetadata_df, plot_summaries_df):
+    # Keep only the essential elements of the bechdel dataset --> movie title and bechdel test
+    bechdel_data_essential = bechdel_data[['title','bt_score']]
+
+    # Keep only bechdel test = 0 or test = 3 (feminist and non-feminist)
+    bechdel_data_essential = bechdel_data_essential[bechdel_data_essential['bt_score'].isin([0, 3])]
+
+    # Rename the title to match the movie plots dataset
+    bechdel_data_essential.rename(columns = {'title':'Movie name'}, inplace = True)
+
+    # merge the movie plots with their movie names
+    movie_ID_names = MovieMetadata_df[['Wikipedia movie ID','Movie name']]
+    merged_plots_names = pd.merge(movie_ID_names, plot_summaries_df, on='Wikipedia movie ID', how='inner')
+
+    # merge the feminist movie information with the plots
+    merged_bechdel_plot = pd.merge(bechdel_data_essential, merged_plots_names, on='Movie name', how='inner')
+    merged_bechdel_plot = merged_bechdel_plot.drop(['Wikipedia movie ID'],axis=1)
+    return merged_bechdel_plot
+
+# Function to return the dates filter to only contain the years
+def filter_years(MovieMetadata_df):
+    years = MovieMetadata_df["Movie release date"].values
+
+    #filter the dates to keep only the years
+    filtered_years =[]
+    for year in years:
+        if isinstance(year, str):
+            if len(year) > 4:
+                filtered_years.append(year[0:4])
+            else:
+                filtered_years.append(year)
+
+    # count the number of occurences for each year
+    filtered_years = pd.Series(filtered_years)
+    return filtered_years

@@ -15,7 +15,7 @@ Our project delves into the influence of major historical events of the second p
 - We would like to get an idea of the viewers’ opinion on the movies, the dataset we will use is :  [TMDB Movies Dataset 2023](https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies).  
 This dataset contains a large number of movies, in order to use it efficiently, we will merge it to the CMU dataset and use only the corresponding movies. It also contains information on the revenue of the movies which would fill the missing values in our original dataset.
 
-- The following datasets help us define a feminist movie: (1) [Female Representation in Cinema](https://www.kaggle.com/datasets/vinifm/female-representation-in-cinema), (2)[Bechdel test data](https://r-packages.io/datasets/bechdel) These datasets will be used to train a machine learning model able to detect feminist movies through their plot.
+- The following datasets help us define a feminist movie: (1) [Female Representation in Cinema](https://www.kaggle.com/datasets/vinifm/female-representation-in-cinema), (2) [Bechdel test data](https://r-packages.io/datasets/bechdel) These datasets will be used to train a machine learning model able to detect feminist movies through their plot.
 
 ## Methods
 

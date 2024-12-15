@@ -7,10 +7,10 @@ def create_datasets(file_source = '', reviews_source = ''):
     # MetaData 
 
     #### Movie metadata #### DF
-    MovieMetadata_df = pd.read_csv(file_source +'/MovieSummaries/movie.metadata.tsv', sep='\t', header=None)
+    MovieMetadata_df = pd.read_csv(file_source +'/movie.metadata.tsv', sep='\t', header=None)
 
     #### Character metadata #### DF
-    CharacterMetadata_df = pd.read_csv(file_source + '/MovieSummaries/character.metadata.tsv', sep='\t', header=None)
+    CharacterMetadata_df = pd.read_csv(file_source + '/character.metadata.tsv', sep='\t', header=None)
 
     # Define column headers as a list
     MovieMetadata_df_headers = [
@@ -47,9 +47,9 @@ def create_datasets(file_source = '', reviews_source = ''):
     CharacterMetadata_df.columns = CharacterMetadata_df_headers
 
     # Text data 
-    names_df = pd.read_csv(file_source+'MovieSummaries/name.clusters.txt', sep="\t", header=None)
-    plot_summaries_df = pd.read_csv(file_source+'MovieSummaries/plot_summaries.txt', sep="\t", header=None)
-    tvTropes_df = pd.read_csv(file_source+'MovieSummaries/tvtropes.clusters.txt', sep="\t", header=None)
+    names_df = pd.read_csv(file_source+'/name.clusters.txt', sep="\t", header=None)
+    plot_summaries_df = pd.read_csv(file_source+'/plot_summaries.txt', sep="\t", header=None)
+    tvTropes_df = pd.read_csv(file_source+'/tvtropes.clusters.txt', sep="\t", header=None)
 
     names_df_headers = [
         'Character Names',

@@ -1,6 +1,8 @@
 import pandas as pd
 import ast
 
+########### Helper functions ###########
+
 def create_datasets(file_source = '', reviews_source = ''):
     # MetaData 
 

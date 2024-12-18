@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Graphs</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .button-container {
+            margin: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .plot-row {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .plot {
+            width: 45%;
+            margin: 0 2%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Comparison of Bechdel Test Results</h1>
+    <div class="button-container">
+        <button onclick="showPlots('gpt')">Show GPT Predictions</button>
+        <button onclick="showPlots('svm')">Show SVM Predictions</button>
+    </div>
+    <div class="plot-row">
+        <div id="bar-plot" class="plot"></div>
+        <div id="line-plot" class="plot"></div>
+    </div>
+    <script>
+        // Data for GPT bar chart
+        const figGPTBar = {"data":[{"marker":{"color":"lightgray"},"name":"Total Movies","x":[1893,1894,1895],"y":[1,2,9],"type":"bar"},{"marker":{"color":"salmon"},"name":"Feminist Movies (GPT)","x":[1893,1894,1895],"y":[0,1,1],"type":"bar"}],"layout":{"title":"GPT: Bar Chart of Movies","barmode":"overlay"}};
+
+        // Data for GPT line plot
+        const figGPTLine = {"data":[{"x":[1893,1894,1895],"y":[0,50,11],"type":"scatter","mode":"lines+markers","name":"GPT: Feminist Movie %"},{"x":[1893,1894,1895],"y":[10,20,30],"type":"scatter","mode":"lines","name":"Linear Regression","line":{"dash":"dot","color":"gray"}}],"layout":{"title":"GPT: Feminist Movie Percentage with Regression"}};
+
+        // Data for SVM bar chart
+        const figSVMBar = {"data":[{"marker":{"color":"lightgray"},"name":"Total Movies","x":[1893,1894,1895],"y":[1,2,9],"type":"bar"},{"marker":{"color":"salmon"},"name":"Feminist Movies (SVM)","x":[1893,1894,1895],"y":[1,2,3],"type":"bar"}],"layout":{"title":"SVM: Bar Chart of Movies","barmode":"overlay"}};
+
+        // Data for SVM line plot
+        const figSVMLine = {"data":[{"x":[1893,1894,1895],"y":[10,20,30],"type":"scatter","mode":"lines+markers","name":"SVM: Feminist Movie %"},{"x":[1893,1894,1895],"y":[15,25,35],"type":"scatter","mode":"lines","name":"Linear Regression","line":{"dash":"dot","color":"gray"}}],"layout":{"title":"SVM: Feminist Movie Percentage with Regression"}};
+
+        // Function to show the selected model's plots
+        function showPlots(model) {
+            if (model === 'gpt') {
+                Plotly.newPlot('bar-plot', figGPTBar.data, figGPTBar.layout);
+                Plotly.newPlot('line-plot', figGPTLine.data, figGPTLine.layout);
+            } else if (model === 'svm') {
+                Plotly.newPlot('bar-plot', figSVMBar.data, figSVMBar.layout);
+                Plotly.newPlot('line-plot', figSVMLine.data, figSVMLine.layout);
+            }
+        }
+
+        // Show GPT plots by default
+        showPlots('gpt');
+    </script>
+</body>
+</html>

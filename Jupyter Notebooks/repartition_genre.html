@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Pie Chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .dropdown {
+            margin-bottom: 20px;
+            width: 50%;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Actor Gender Repartition per Movie Genre and Period</h1>
+
+    <!-- Dropdown for Genre -->
+    <div class="dropdown">
+        <label for="genre-dropdown">Select Genre:</label>
+        <select id="genre-dropdown">
+            <option value="Action and Adventure">Action and Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Crime and Mystery">Crime and Mystery</option>
+            <option value="Cult">Cult</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Drama">Drama</option>
+            <option value="Experimental">Experimental</option>
+            <option value="Family and Kids">Family and Kids</option>
+            <option value="History">History</option>
+            <option value="Horror and Thriller">Horror and Thriller</option>
+            <option value="Indie">Indie</option>
+            <option value="Miscellaneous Other Genres">Miscellaneous Other Genres</option>
+            <option value="Musical">Musical</option>
+            <option value="Other">Other</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-Fi and Fantasy">Sci-Fi and Fantasy</option>
+            <option value="Social Issues and Political Films">Social Issues and Political Films</option>
+        </select>
+    </div>
+
+    <!-- Dropdown for Period -->
+    <div class="dropdown">
+        <label for="period-dropdown">Select Period:</label>
+        <select id="period-dropdown">
+            <option value="1940-1960">1940-1960</option>
+            <option value="1960-1980">1960-1980</option>
+            <option value="1980-2020">1980-2020</option>
+        </select>
+    </div>
+
+    <!-- Div to hold the pie chart -->
+    <div id="plot"></div>
+
+    <script>
+        // Data definition: Replace this with your actual data
+        const data = {
+            "Action and Adventure": {
+                "1940-1960": { Male: 79.42062179242481, Female: 20.57937820757518 },
+                "1960-1980": { Male: 78.44062904050276, Female: 21.559370959497247 },
+                "1980-2020": { Male: 74.2505517290127, Female: 25.7494482709873 },
+            },
+            "Comedy": {
+                "1940-1960": { Male: 69.31001589825118, Female: 30.689984101748806 },
+                "1960-1980": { Male: 68.99658534578516, Female: 31.003414654214833 },
+                "1980-2020": { Male: 64.13383137363196, Female: 35.86616862636804 },
+            },
+            "Crime and Mystery": {
+                "1940-1960": { Male: 70.68300153139356, Female: 29.31699846860643 },
+                "1960-1980": { Male: 72.23777589686829, Female: 27.762224103131715 },
+                "1980-2020": { Male: 70.03711602913886, Female: 29.96288397086115 },
+            },
+            "Cult": {
+                "1940-1960": { Male: 76.0593220338983, Female: 23.940677966101696 },
+                "1960-1980": { Male: 67.45017884517118, Female: 32.54982115482882 },
+                "1980-2020": { Male: 63.81623277182236, Female: 36.18376722817764 },
+            },
+            "Documentary": {
+                "1940-1960": { Male: 71.12998040496407, Female: 28.870019595035924 },
+                "1960-1980": { Male: 76.38036809815951, Female: 23.619631901840492 },
+                "1980-2020": { Male: 71.14028550134725, Female: 28.859714498652757 },
+            },
+            "Drama": {
+                "1940-1960": { Male: 67.55364806866953, Female: 32.44635193133047 },
+                "1960-1980": { Male: 67.809040461783, Female: 32.19095953821701 },
+                "1980-2020": { Male: 63.90873664780129, Female: 36.09126335219871 },
+            },
+            "Experimental": {
+                "1940-1960": { Male: 72.07207207207207, Female: 27.927927927927925 },
+                "1960-1980": { Male: 66.05424321959755, Female: 33.94575678040245 },
+                "1980-2020": { Male: 68.6007702182285, Female: 31.399229781771503 },
+            },
+            "Family and Kids": {
+                "1940-1960": { Male: 76.89305230288836, Female: 23.106947697111632 },
+                "1960-1980": { Male: 72.2959033303861, Female: 27.70409666961391 },
+                "1980-2020": { Male: 65.72540430607975, Female: 34.274595693920254 },
+            },
+            "History": {
+                "1940-1960": { Male: 71.11283443195036, Female: 28.88716556804963 },
+                "1960-1980": { Male: 75.17995968902966, Female: 24.82004031097034 },
+                "1980-2020": { Male: 71.10866610575367, Female: 28.89133389424633 },
+            },
+            "Horror and Thriller": {
+                "1940-1960": { Male: 71.83205144370193, Female: 28.16794855629807 },
+                "1960-1980": { Male: 67.39815787846943, Female: 32.60184212153057 },
+                "1980-2020": { Male: 66.6455392101739, Female: 33.354460789826106 },
+            },
+            "Indie": {
+                "1940-1960": { Male: 77.52200406228842, Female: 22.47799593771158 },
+                "1960-1980": { Male: 69.05109489051094, Female: 30.94890510948905 },
+                "1980-2020": { Male: 63.94944941246028, Female: 36.050550587539725 },
+            },
+            "Miscellaneous Other Genres": {
+                "1940-1960": { Male: 69.58966121495327, Female: 30.410338785046733 },
+                "1960-1980": { Male: 70.78648195315897, Female: 29.213518046841024 },
+                "1980-2020": { Male: 66.11979997872113, Female: 33.88020002127886 },
+            },
+            "Musical": {
+                "1940-1960": { Male: 63.330283623055806, Female: 36.66971637694419 },
+                "1960-1980": { Male: 64.7412928192633, Female: 35.25870718073671 },
+                "1980-2020": { Male: 65.4890351731391, Female: 34.510964826860906 },
+            },
+            "Other": {
+                "1940-1960": { Male: 67.1003717472119, Female: 32.899628252788105 },
+                "1960-1980": { Male: 64.0427599611273, Female: 35.95724003887269 },
+                "1980-2020": { Male: 66.77419354838709, Female: 33.225806451612904 },
+            },
+            "Romance": {
+                "1940-1960": { Male: 63.84639646743416, Female: 36.15360353256584 },
+                "1960-1980": { Male: 61.435488464824836, Female: 38.564511535175164 },
+                "1980-2020": { Male: 59.17291534431379, Female: 40.82708465568621 },
+            },
+            "Sci-Fi and Fantasy": {
+                "1940-1960": { Male: 73.71357718536888, Female: 26.286422814631123 },
+                "1960-1980": { Male: 71.50946001933434, Female: 28.490539980665652 },
+                "1980-2020": { Male: 67.9410641419928, Female: 32.058935858007196 },
+            },
+            "Social Issues and Political Films": {
+                "1940-1960": { Male: 76.2252346193952, Female: 23.774765380604794 },
+                "1960-1980": { Male: 74.9706916764361, Female: 25.029308323563892 },
+                "1980-2020": { Male: 72.88888888888889, Female: 27.111111111111114 },
+            }
+        };
+
+        // Function to render the pie chart
+        function updateChart() {
+            // Get the selected genre and period
+            const genre = document.getElementById("genre-dropdown").value;
+            const period = document.getElementById("period-dropdown").value;
+
+            // Get the data for the selected options
+            const chartData = data[genre][period];
+
+            // Prepare the chart data and layout
+            const labels = ["Male", "Female"];
+            const values = [chartData.Male, chartData.Female];
+            const colors = ["orange", "green"];
+
+            const pieData = [{
+                labels: labels,
+                values: values,
+                type: "pie",
+                hole: 0.4,
+                marker: { colors: colors }
+            }];
+
+            const layout = {
+                title: `Genre: ${genre} | Period: ${period}`,
+                title_x: 0.5
+            };
+
+            // Render the chart
+            Plotly.newPlot("plot", pieData, layout);
+        }
+
+        // Add event listeners to dropdowns
+        document.getElementById("genre-dropdown").addEventListener("change", updateChart);
+        document.getElementById("period-dropdown").addEventListener("change", updateChart);
+
+        // Initial chart render
+        updateChart();
+    </script>
+</body>
+</html>

@@ -27,7 +27,7 @@ https://letterboxd.com/brunaleo/list/essential-feminist-films-worldwide/
 
 ## Methods: 
 
-Our project is separated into two main parts: Bechel test and feminism movies. In each part, we implement several models to determine if a movie passes the Bechdel Test or if it can be considered as a feminism movie. To train them, we used the previous dataset that contains 1800 movies. (rajouter détails du dataset ? )
+Our project is separated into two main parts: Bechel test and feminism movies. In each part, we implement several models to determine if a movie passes the Bechdel Test or if it can be considered as a feminism movie. To train them, we used the previous dataset that contains 1800 movies. 
 
 ### Part 1: Bechdel Test
 

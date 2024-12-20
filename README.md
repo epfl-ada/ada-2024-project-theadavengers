@@ -1,65 +1,65 @@
-# Power of film as a cultural mirror  
+# Lights, Camera, Inequality: The Story Of Women in Cinema
 
 ## Abstract: 
 
-Our project delves into the influence of major historical events of the second part - WW2, The feminist movement and the space exploration era – on global movies’ trends. Our goal would be to reveal how these different events shape the movie industry, more specifically the different genre popularities, character developments and narrative structures using different tools such as graph theory to reveal relationships, machine learning and natural language processing. We would like to identify different patterns of cultural influences and genre trend evolution embedded in movies over time. We shall also use data analysis to analyze plot summaries, genres, character details and themes across movies. In the scope, we wish to tell a compelling story about how the movie industry is both reflected and influenced by collective consciousness, using historical events as a foundation to trace shifts in public sentiment, cultural values, and artistic expression over time.
+Cinema reflects society, showcasing its values and, often, its inequalities. Historically, women on screen have been sidelined to secondary or stereotypical roles, overshadowed by male characters. But has this improved over time? Are modern films truly more inclusive, or is “feminism” just a buzzword?
+This project dives into the representation of women in cinema, exploring whether female roles have increased, improved, or gained prominence. By analyzing over 80,000 films—spanning genres, countries, and decades—we examine trends like the prevalence of female-led narratives, thematic depth, and the proportion of movies passing the Bechdel test. We also investigate whether certain genres or countries excel in portraying women.
+Using tools like GPT-2 for textual analysis and machine learning models for classification, this study uncovers insights into the evolution of women’s roles in film. Ultimately, we question what meaningful progress looks like and whether cinema truly mirrors the diversity of its audience.
 
-## Research Questions:
-- How have major historical events influenced cinema ? 
-- Can we link movie plots to the political environment (e.g. inter-character relationships link to US-USSR relationships) ?
-- In what ways do movies reflect public sentiment and cultural attitudes towards these events ?
-- On the contrary, can fluctuation in movie trends predict a form of societal shift?
-- Through graph theory, can we find which are the strongest links between movies and historical events and which part of these events is actually the most represented in movies ?
+Research Questions: 
+- Are female roles more numerous today than they were in past decades?
+- Are female characters more prevalent in certain film genres (drama, comedy, action, etc.) compared to others? And what about across different countries?
+- How has the proportion of films passing the Bechdel test evolved over time? And how does it vary across genres and countries?
+- What characteristics define a “feminist film” (e.g., themes, characters, etc.)? Do these films have specific markers in their plots or narrative styles?
+- How can graph theory be used to analyze the relationships between characters in films, and do films with strong female roles or feminist themes exhibit distinct graph structures (e.g., centrality, clustering, or connectivity) compared to others?
 
-## Proposed additional datasets: 
-- We would like to get an idea of the viewers’ opinion on the movies, the dataset we will use is :  [TMDB Movies Dataset 2023](https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies).  
-This dataset contains a large number of movies, in order to use it efficiently, we will merge it to the CMU dataset and use only the corresponding movies. It also contains information on the revenue of the movies which would fill the missing values in our original dataset.
+If you want to know the answer to these questions, do not hesitate to click on this link: (https://jbenand.github.io/index)
 
-- The following datasets help us define a feminist movie: (1) [Female Representation in Cinema](https://www.kaggle.com/datasets/vinifm/female-representation-in-cinema), (2) [Bechdel test data](https://r-packages.io/datasets/bechdel) These datasets will be used to train a machine learning model able to detect feminist movies through their plot.
 
-## Methods
+## Proposed additional datasets :  
+The following dataset helps us determine if a movie passes the Bechdel test or not: https://www.kaggle.com/datasets/vinifm/female-representation-in-cinema
+https://r-packages.io/datasets/bechdel
+This dataset will be used to train a machine learning model able to detect feminist movies through their plot.
+We also used a dataset  of movies that were nominated or won the Best Picture Oscar: https://www.kaggle.com/datasets/martinmraz07/oscar-movies/data
+This dataset allowed us to determine the number of Bechdel-passing and feminist films that won an Oscar or were nominated.
+To define if a movie was feminist, we create our own dataset based on the following lists: 
+https://letterboxd.com/brunaleo/list/essential-feminist-films-worldwide/
 
-### Most of our work will be split into 3 tasks:
+## Methods: 
 
-1. **Defining the scope of analysis**  
-   How is a movie linked to a historical event? For example, how do we define a feminist movie, what makes a movie “feminist”? This will allow us to separate the target group of movies and do further research on them. 
+Our project is separated into two main parts: Bechel test and feminism movies. In each part, we implement several models to determine if a movie passes the Bechdel Test or if it can be considered as a feminism movie. To train them, we used the previous dataset that contains 1800 movies. (rajouter détails du dataset ? )
 
-   - **ML on plot descriptions**: For the ML method, supervised (training set required) and unsupervised techniques (clustering e.g. linked to an event) can be used, allowing us to predict which of our movies correspond to the event. 
-   - **Simple word search or genre lookup**: straightforward techniques that will be implemented with the use of pandas and string comparisons. We will do brainstorming and research in order to decide on the words and genre linked to the event.
+### Part 1: Bechdel Test
 
-2. **Analyzing the selected movies through time, popularity, and different definitions of the event and public sentiment assessment**  
-   In this section, we aim to explore how movies are connected to historical events and identify observable trends, which will allow us to draw conclusions and address our research questions.
+#### GPT-2 model
 
-   - Our initial approach involves visualizing the data with time-based boxplots. This will help us examine whether the rise of certain movies aligns with specific historical events, enabling us to draw preliminary conclusions.
-   - Next, by analyzing changes in trends over time with targeted keyword searches, we can identify the most significant terms. This will reveal which aspects of historical events were most frequently represented in movies, offering insight into public sentiment and the general mood surrounding these films. To reinforce these findings, we’ll also analyze movie reviews to understand the emotions they evoke, the reactions they spark, and the reasons behind them.
-   - Additionally, it would be valuable to investigate whether different events and movies are interconnected and uncover the underlying factors that create these connections.
+GPT-2 is a pre-trained language model that specializes in understanding and generating natural language. It excels in analyzing text and capturing the nuances of meaning within a given context. In this case, GPT-2 was used to analyze movie plot summaries to determine whether a movie passes the Bechdel Test. 
 
-3. **Using graph theory to link everything together and getting a visual feedback of the interconnections**  
-   Finally, using graph theory will be a great way of summarizing all of our findings and getting visual feedback on the project research. The nodes will represent movies and historical events whereas the edges will represent the different links between an event and a movie. Furthermore, we can use different sized edges to show a stronger connection.
+We turned to GPT-2, a pre-trained language model that specializes in generating and understanding natural language. GPT-2 was chosen for its ability to analyze the semantics of movie plot summaries, helping us identify nuanced themes and context that go beyond simple keyword matching. By fine-tuning GPT-2 on a custom dataset of feminist movies, we were able to improve its ability to recognize feminist elements in films, providing a richer and more accurate classification than the Bechdel Test alone.
 
-## Proposed Timeline
+This method is especially valuable in addressing the limitations of the Bechdel Test, which can miss films with feminist messages that might not meet its criteria. GPT-2 allows us to go beyond surface-level analysis and dive deeper into the language of movie summaries, identifying key themes, character arcs, and narrative structures that reflect feminist ideas.
 
-- **Step 0**: Data cleaning and exploration + labeling  
-  Mainly done for milestone 2. Process and clean movie data for consistency. Remove duplicates, handle missing data, and standardize genres or keywords. Data exploration should be with all extra datasets that we added. Explore the number of movies and its box office in different chosen themes. Make training sets for ML models training (especially for space race movies) 
+#### Support Vector Machine (SVM) model
 
-- **Step 1**: Defining the target movie groups (Week 1)  
-  Classify all movies per genre and theme (Space, WW2 and/or Feminism for now) using various techniques, as described previously (step 1 of methods). 
+SVM, a supervised machine learning algorithm,  was selected as it excels in handling binary classification tasks using numerical and categorical input features. For the second metric—where female cast proportion is included—SVM provides a straightforward and interpretable model to classify movies with high accuracy.
 
-- **Step 2**: Data Analysis (Week 2-3)  
-  Conduct initial exploratory analysis on genre distribution over time, focusing on spikes around key historical events. Apply sentiment analysis to plot summaries, looking for shifts in tone across different periods (e.g., positive vs. negative sentiment before and after major wars). Keywords frequency analysis to find movie genre trends.  
-  Use time series analysis to measure the correlations between historical events or movements and genre popularity or sentiment changes and study the frequency of movie releases in selected genres and the views of the audience.  
-  Use Diversity analysis to track diversity trends in films, such as the number of movies with female or minority leads, and correlate these with social movements.  
-  Use Topic modeling to identify recurring themes in movie plot summaries and analyze how these topics shift over time.
+Once trained, the model can then classify new movies based on the proportion of female actresses in the cast. It assigns movies to one of the two categories: those that are considered to have good representation of women and those that don’t.
 
-- **Step 3**: Visualization (Week 4)  
-  Develop visualizations and graph theory to represent findings across events timeline. 
+### Part 2: Feminism movies
 
-- **Step 4**: Compilation of All Our Analysis (Week 5)  
+To determine if a movie is feminist or not, we also implement a GPT-2 model. We selected 300 movies that were considered feminist (see link above) and 300 movies that failed the Bechdel Test to constitute our training set. We then use this model to predict if a movie in our initial dataset could be considered as feminist or not. 
 
-## Organization Within the Team
+## Contributions of each group member: 
 
-- **Shrinidhi & Marianne**: Feminism movement 
-- **Dorah & Jacques**: Space exploration
-- **Mathieu**: WW2
+Shrinidhi Singaravelan: Implementation of GPT models, data analysis and result plotting, website, and writing.
+
+Marianne Civit-Ardevol: Data analysis for the graph theory section, results plotting, and writing.
+
+Dorah Borgi: Introduction, general analysis and plots of the observations in each section, and writing.
+
+Jacques Bénand : setting up the website, implementation of the SVM model and results plotting
+
+Mathieu :  website and writing. 
+
 
 

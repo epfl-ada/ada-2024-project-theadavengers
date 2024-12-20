@@ -92,6 +92,15 @@ def create_datasets(file_source = '', reviews_source = ''):
     #MovieMetadata_df['Year'] = MovieMetadata_df['Year'].apply(lambda x: int(x) if pd.notna(x) else x)
     MovieMetadata_df['Year'] = pd.to_numeric(MovieMetadata_df['Year'], errors='coerce').astype('Int64')
 
+
+    CharacterMetadata_df['Year'] = CharacterMetadata_df['Movie release date'].apply(extract_year)
+    CharacterMetadata_df['Year'] = pd.to_numeric(CharacterMetadata_df['Year'], errors='coerce').astype('Int64')
+    MovieMetadata_df_filtered = MovieMetadata_df[['Wikipedia movie ID', 'Movie countries (Freebase ID:name tuples)',
+                                              'Movie genres (Freebase ID:name tuples)', 'Country dictionnaire', 'Genre dictionnaire', 
+                                              'Movie box office revenue' ]]
+    CharacterMetadata_df = pd.merge(CharacterMetadata_df,MovieMetadata_df_filtered, on = 'Wikipedia movie ID', how='left' )
+
+
     return MovieMetadata_df, CharacterMetadata_df, names_df, plot_summaries_df, tvTropes_df, merged_Movie
 
 # Function to count the number of movies per country and keep those with >500 movies

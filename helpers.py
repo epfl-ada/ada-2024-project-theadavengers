@@ -93,6 +93,10 @@ def create_datasets(file_source = '', reviews_source = ''):
     #MovieMetadata_df['Year'] = MovieMetadata_df['Year'].apply(lambda x: int(x) if pd.notna(x) else x)
     MovieMetadata_df['Year'] = pd.to_numeric(MovieMetadata_df['Year'], errors='coerce').astype('Int64')
 
+    MovieMetadata_df['Country dictionnaire'] = MovieMetadata_df['Movie countries (Freebase ID:name tuples)'].apply(ast.literal_eval)
+    MovieMetadata_df['Genre dictionnaire'] = MovieMetadata_df['Movie genres (Freebase ID:name tuples)'].apply(ast.literal_eval)
+    MovieMetadata_df['Language dictionnaire'] = MovieMetadata_df['Movie languages (Freebase ID:name tuples)'].apply(ast.literal_eval)
+
 
     CharacterMetadata_df['Year'] = CharacterMetadata_df['Movie release date'].apply(extract_year)
     CharacterMetadata_df['Year'] = pd.to_numeric(CharacterMetadata_df['Year'], errors='coerce').astype('Int64')

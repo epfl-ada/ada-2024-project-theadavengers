@@ -1,5 +1,6 @@
 import pandas as pd
 import ast
+import json
 
 ########### Helper functions ###########
 
@@ -155,3 +156,16 @@ def filter_years(MovieMetadata_df):
     # count the number of occurences for each year
     filtered_years = pd.Series(filtered_years)
     return filtered_years
+
+
+# Function to preprocess genre column
+def extract_genres(genre_str):
+    try:
+        # Convert the genre string (which is in JSON format) to a dictionary
+        genre_dict = json.loads(genre_str)
+        # Extract genre names from the dictionary (the values)
+        genres = list(genre_dict.values())
+        return genres
+    except Exception as e:
+        # In case of an error in parsing, return an empty list or handle the error appropriately
+        return []

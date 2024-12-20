@@ -39,7 +39,7 @@ We turned to GPT-2, a pre-trained language model that specializes in generating 
 
 This method is especially valuable in addressing the limitations of the Bechdel Test, which can miss films with feminist messages that might not meet its criteria. GPT-2 allows us to go beyond surface-level analysis and dive deeper into the language of movie summaries, identifying key themes, character arcs, and narrative structures that reflect feminist ideas.
 
-#### Support Vector Machine (SVM) model
+#### Support Vector Machine (SVM) model
 
 SVM, a supervised machine learning algorithm,  was selected as it excels in handling binary classification tasks using numerical and categorical input features. For the second metric—where female cast proportion is included—SVM provides a straightforward and interpretable model to classify movies with high accuracy.
 
